@@ -87,6 +87,9 @@ static dispatch_once_t onceToken = 0;
 }
 
 - (void)fetchConnectionToken:(SCPConnectionTokenCompletionBlock)completion {
+    if (self.bridge == nil) {
+        return;
+    }
     pendingConnectionTokenCompletionBlock = completion;
     [self sendEventWithName:@"requestConnectionToken" body:@{}];
 }
